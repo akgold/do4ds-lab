@@ -2,10 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://github.com/akgold/do4ds-lab/index.html</loc>
-    <lastmod>2023-04-16T17:12:52.789Z</lastmod>
+    <lastmod>2023-04-16T17:56:51.134Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/akgold/do4ds-lab/eda.html</loc>
-    <lastmod>2023-04-16T17:12:56.829Z</lastmod>
+    <lastmod>2023-04-16T17:56:55.318Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/akgold/do4ds-lab/model.html</loc>
+    <lastmod>2023-04-16T17:57:00.066Z</lastmod>
   </url>
 </urlset>

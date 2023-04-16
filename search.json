@@ -19,5 +19,33 @@
     "title": "Penguins EDA",
     "section": "Penguin Size vs Mass by Species",
     "text": "Penguin Size vs Mass by Species\n\n\nCode\npalmerpenguins::penguins %>%\n  filter(complete.cases(.)) %>%\n  ggplot(aes(x = bill_length_mm, y = body_mass_g, color = species)) +\n  geom_point() + \n  geom_smooth(method = \"lm\")\n\n\n`geom_smooth()` using formula = 'y ~ x'"
+  },
+  {
+    "objectID": "model.html",
+    "href": "model.html",
+    "title": "Model",
+    "section": "",
+    "text": "Code\nfrom palmerpenguins import penguins\nfrom pandas import get_dummies\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn import preprocessing"
+  },
+  {
+    "objectID": "model.html#get-data",
+    "href": "model.html#get-data",
+    "title": "Model",
+    "section": "Get Data",
+    "text": "Get Data\n\n\nCode\ndf = penguins.load_penguins().dropna()\n\ndf.head(3)\n\n\n\n\n\n\n  \n    \n      \n      species\n      island\n      bill_length_mm\n      bill_depth_mm\n      flipper_length_mm\n      body_mass_g\n      sex\n      year\n    \n  \n  \n    \n      0\n      Adelie\n      Torgersen\n      39.1\n      18.7\n      181.0\n      3750.0\n      male\n      2007\n    \n    \n      1\n      Adelie\n      Torgersen\n      39.5\n      17.4\n      186.0\n      3800.0\n      female\n      2007\n    \n    \n      2\n      Adelie\n      Torgersen\n      40.3\n      18.0\n      195.0\n      3250.0\n      female\n      2007"
+  },
+  {
+    "objectID": "model.html#define-model-and-fit",
+    "href": "model.html#define-model-and-fit",
+    "title": "Model",
+    "section": "Define Model and Fit",
+    "text": "Define Model and Fit\n\n\nCode\nX = get_dummies(df[['bill_length_mm', 'species', 'sex']], drop_first = True)\ny = df['body_mass_g']\n\nmodel = LinearRegression().fit(X, y)"
+  },
+  {
+    "objectID": "model.html#get-some-information",
+    "href": "model.html#get-some-information",
+    "title": "Model",
+    "section": "Get some information",
+    "text": "Get some information\n\n\nCode\nprint(f\"R^2 {model.score(X,y)}\")\nprint(f\"Intercept {model.intercept_}\")\nprint(f\"Columns {X.columns}\")\nprint(f\"Coefficients {model.coef_}\")\n\n\nR^2 0.8555368759537614\nIntercept 2169.269720939398\nColumns Index(['bill_length_mm', 'species_Chinstrap', 'species_Gentoo', 'sex_male'], dtype='object')\nCoefficients [  32.53688677 -298.76553447 1094.86739145  547.36692408]"
   }
 ]

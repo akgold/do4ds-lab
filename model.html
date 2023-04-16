@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Palmer Penguins Site - Penguins EDA</title>
+<title>Palmer Penguins Site - Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -121,6 +121,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -147,11 +150,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./eda.html" aria-current="page">
+    <a class="nav-link" href="./eda.html">
  <span class="menu-text">EDA</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./model.html">
+    <a class="nav-link active" href="./model.html" aria-current="page">
  <span class="menu-text">Model</span></a>
   </li>  
 </ul>
@@ -169,8 +172,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#penguin-size-and-mass-by-sex-and-species" id="toc-penguin-size-and-mass-by-sex-and-species" class="nav-link active" data-scroll-target="#penguin-size-and-mass-by-sex-and-species">Penguin Size and Mass by Sex and Species</a></li>
-  <li><a href="#penguin-size-vs-mass-by-species" id="toc-penguin-size-vs-mass-by-species" class="nav-link" data-scroll-target="#penguin-size-vs-mass-by-species">Penguin Size vs Mass by Species</a></li>
+  <li><a href="#get-data" id="toc-get-data" class="nav-link active" data-scroll-target="#get-data">Get Data</a></li>
+  <li><a href="#define-model-and-fit" id="toc-define-model-and-fit" class="nav-link" data-scroll-target="#define-model-and-fit">Define Model and Fit</a></li>
+  <li><a href="#get-some-information" id="toc-get-some-information" class="nav-link" data-scroll-target="#get-some-information">Get some information</a></li>
   </ul>
 </nav>
     </div>
@@ -179,7 +183,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Penguins EDA</h1>
+<h1 class="title">Model</h1>
 </div>
 
 
@@ -194,141 +198,110 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="penguin-size-and-mass-by-sex-and-species" class="level2">
-<h2 class="anchored" data-anchor-id="penguin-size-and-mass-by-sex-and-species">Penguin Size and Mass by Sex and Species</h2>
-<div class="cell">
+<div class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>palmerpenguins<span class="sc">::</span>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species, sex) <span class="sc">%&gt;%</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">where</span>(is.numeric), </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      \(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> penguins</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pandas <span class="im">import</span> get_dummies</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> preprocessing</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'species'. You can override using the
-`.groups` argument.</code></pre>
 </div>
-<div class="cell-output-display">
-<table class="table table-sm table-striped">
-<colgroup>
-<col style="width: 11%">
-<col style="width: 8%">
-<col style="width: 17%">
-<col style="width: 16%">
-<col style="width: 21%">
-<col style="width: 14%">
-<col style="width: 10%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">species</th>
-<th style="text-align: left;">sex</th>
-<th style="text-align: right;">bill_length_mm</th>
-<th style="text-align: right;">bill_depth_mm</th>
-<th style="text-align: right;">flipper_length_mm</th>
-<th style="text-align: right;">body_mass_g</th>
-<th style="text-align: right;">year</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Adelie</td>
-<td style="text-align: left;">female</td>
-<td style="text-align: right;">37.25753</td>
-<td style="text-align: right;">17.62192</td>
-<td style="text-align: right;">187.7945</td>
-<td style="text-align: right;">3368.836</td>
-<td style="text-align: right;">2008.055</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Adelie</td>
-<td style="text-align: left;">male</td>
-<td style="text-align: right;">40.39041</td>
-<td style="text-align: right;">19.07260</td>
-<td style="text-align: right;">192.4110</td>
-<td style="text-align: right;">4043.493</td>
-<td style="text-align: right;">2008.055</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Adelie</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">37.84000</td>
-<td style="text-align: right;">18.32000</td>
-<td style="text-align: right;">185.6000</td>
-<td style="text-align: right;">3540.000</td>
-<td style="text-align: right;">2007.000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Chinstrap</td>
-<td style="text-align: left;">female</td>
-<td style="text-align: right;">46.57353</td>
-<td style="text-align: right;">17.58824</td>
-<td style="text-align: right;">191.7353</td>
-<td style="text-align: right;">3527.206</td>
-<td style="text-align: right;">2007.971</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Chinstrap</td>
-<td style="text-align: left;">male</td>
-<td style="text-align: right;">51.09412</td>
-<td style="text-align: right;">19.25294</td>
-<td style="text-align: right;">199.9118</td>
-<td style="text-align: right;">3938.971</td>
-<td style="text-align: right;">2007.971</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Gentoo</td>
-<td style="text-align: left;">female</td>
-<td style="text-align: right;">45.56379</td>
-<td style="text-align: right;">14.23793</td>
-<td style="text-align: right;">212.7069</td>
-<td style="text-align: right;">4679.741</td>
-<td style="text-align: right;">2008.069</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Gentoo</td>
-<td style="text-align: left;">male</td>
-<td style="text-align: right;">49.47377</td>
-<td style="text-align: right;">15.71803</td>
-<td style="text-align: right;">221.5410</td>
-<td style="text-align: right;">5484.836</td>
-<td style="text-align: right;">2008.066</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Gentoo</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">45.62500</td>
-<td style="text-align: right;">14.55000</td>
-<td style="text-align: right;">215.7500</td>
-<td style="text-align: right;">4587.500</td>
-<td style="text-align: right;">2008.400</td>
-</tr>
-</tbody>
+<section id="get-data" class="level2">
+<h2 class="anchored" data-anchor-id="get-data">Get Data</h2>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> penguins.load_penguins().dropna()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="2">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>species</th>
+      <th>island</th>
+      <th>bill_length_mm</th>
+      <th>bill_depth_mm</th>
+      <th>flipper_length_mm</th>
+      <th>body_mass_g</th>
+      <th>sex</th>
+      <th>year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>39.1</td>
+      <td>18.7</td>
+      <td>181.0</td>
+      <td>3750.0</td>
+      <td>male</td>
+      <td>2007</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>39.5</td>
+      <td>17.4</td>
+      <td>186.0</td>
+      <td>3800.0</td>
+      <td>female</td>
+      <td>2007</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>40.3</td>
+      <td>18.0</td>
+      <td>195.0</td>
+      <td>3250.0</td>
+      <td>female</td>
+      <td>2007</td>
+    </tr>
+  </tbody>
 </table>
 </div>
 </div>
+</div>
 </section>
-<section id="penguin-size-vs-mass-by-species" class="level2">
-<h2 class="anchored" data-anchor-id="penguin-size-vs-mass-by-species">Penguin Size vs Mass by Species</h2>
-<div class="cell">
+<section id="define-model-and-fit" class="level2">
+<h2 class="anchored" data-anchor-id="define-model-and-fit">Define Model and Fit</h2>
+<div class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>palmerpenguins<span class="sc">::</span>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">complete.cases</span>(.)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> body_mass_g, <span class="at">color =</span> species)) <span class="sc">+</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> get_dummies(df[[<span class="st">'bill_length_mm'</span>, <span class="st">'species'</span>, <span class="st">'sex'</span>]], drop_first <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'body_mass_g'</span>]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression().fit(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
-<div class="cell-output-display">
-<p><img src="eda_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</section>
+<section id="get-some-information" class="level2">
+<h2 class="anchored" data-anchor-id="get-some-information">Get some information</h2>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R^2 </span><span class="sc">{</span>model<span class="sc">.</span>score(X,y)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Intercept </span><span class="sc">{</span>model<span class="sc">.</span>intercept_<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Columns </span><span class="sc">{</span>X<span class="sc">.</span>columns<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Coefficients </span><span class="sc">{</span>model<span class="sc">.</span>coef_<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>R^2 0.8555368759537614
+Intercept 2169.269720939398
+Columns Index(['bill_length_mm', 'species_Chinstrap', 'species_Gentoo', 'sex_male'], dtype='object')
+Coefficients [  32.53688677 -298.76553447 1094.86739145  547.36692408]</code></pre>
 </div>
 </div>
 
