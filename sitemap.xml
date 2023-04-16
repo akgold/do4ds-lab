@@ -2,14 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://github.com/akgold/do4ds-lab/index.html</loc>
-    <lastmod>2023-04-16T17:56:51.134Z</lastmod>
+    <lastmod>2023-04-16T19:40:47.594Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/akgold/do4ds-lab/eda.html</loc>
-    <lastmod>2023-04-16T17:56:55.318Z</lastmod>
+    <lastmod>2023-04-16T19:40:52.770Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/akgold/do4ds-lab/model.html</loc>
-    <lastmod>2023-04-16T17:57:00.066Z</lastmod>
+    <lastmod>2023-04-16T19:40:58.802Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/akgold/do4ds-lab/eda-db.html</loc>
+    <lastmod>2023-04-16T19:41:04.558Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/akgold/do4ds-lab/model-db.html</loc>
+    <lastmod>2023-04-16T19:41:08.918Z</lastmod>
   </url>
 </urlset>

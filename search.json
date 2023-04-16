@@ -11,14 +11,14 @@
     "href": "eda.html",
     "title": "Penguins EDA",
     "section": "",
-    "text": "Code\npalmerpenguins::penguins %>%\n  group_by(species, sex) %>%\n  summarise(\n    across(\n      where(is.numeric), \n      \\(x) mean(x, na.rm = TRUE)\n      )\n    ) %>%\n  knitr::kable()\n\n\n`summarise()` has grouped output by 'species'. You can override using the\n`.groups` argument.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nspecies\nsex\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nyear\n\n\n\n\nAdelie\nfemale\n37.25753\n17.62192\n187.7945\n3368.836\n2008.055\n\n\nAdelie\nmale\n40.39041\n19.07260\n192.4110\n4043.493\n2008.055\n\n\nAdelie\nNA\n37.84000\n18.32000\n185.6000\n3540.000\n2007.000\n\n\nChinstrap\nfemale\n46.57353\n17.58824\n191.7353\n3527.206\n2007.971\n\n\nChinstrap\nmale\n51.09412\n19.25294\n199.9118\n3938.971\n2007.971\n\n\nGentoo\nfemale\n45.56379\n14.23793\n212.7069\n4679.741\n2008.069\n\n\nGentoo\nmale\n49.47377\n15.71803\n221.5410\n5484.836\n2008.066\n\n\nGentoo\nNA\n45.62500\n14.55000\n215.7500\n4587.500\n2008.400"
+    "text": "Code\ndf %>%\n  group_by(species, sex) %>%\n  summarise(\n    across(\n      where(is.numeric), \n      \\(x) mean(x, na.rm = TRUE)\n      )\n    ) %>%\n  knitr::kable()\n\n\n`summarise()` has grouped output by 'species'. You can override using the\n`.groups` argument.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nspecies\nsex\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nyear\n\n\n\n\nAdelie\nfemale\n37.25753\n17.62192\n187.7945\n3368.836\n2008.055\n\n\nAdelie\nmale\n40.39041\n19.07260\n192.4110\n4043.493\n2008.055\n\n\nAdelie\nNA\n37.84000\n18.32000\n185.6000\n3540.000\n2007.000\n\n\nChinstrap\nfemale\n46.57353\n17.58824\n191.7353\n3527.206\n2007.971\n\n\nChinstrap\nmale\n51.09412\n19.25294\n199.9118\n3938.971\n2007.971\n\n\nGentoo\nfemale\n45.56379\n14.23793\n212.7069\n4679.741\n2008.069\n\n\nGentoo\nmale\n49.47377\n15.71803\n221.5410\n5484.836\n2008.066\n\n\nGentoo\nNA\n45.62500\n14.55000\n215.7500\n4587.500\n2008.400"
   },
   {
     "objectID": "eda.html#penguin-size-vs-mass-by-species",
     "href": "eda.html#penguin-size-vs-mass-by-species",
     "title": "Penguins EDA",
     "section": "Penguin Size vs Mass by Species",
-    "text": "Penguin Size vs Mass by Species\n\n\nCode\npalmerpenguins::penguins %>%\n  filter(complete.cases(.)) %>%\n  ggplot(aes(x = bill_length_mm, y = body_mass_g, color = species)) +\n  geom_point() + \n  geom_smooth(method = \"lm\")\n\n\n`geom_smooth()` using formula = 'y ~ x'"
+    "text": "Penguin Size vs Mass by Species\n\n\nCode\ndf %>%\n  ggplot(aes(x = bill_length_mm, y = body_mass_g, color = species)) +\n  geom_point() + \n  geom_smooth(method = \"lm\")\n\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\nWarning: Removed 2 rows containing non-finite values (`stat_smooth()`).\n\n\nWarning: Removed 2 rows containing missing values (`geom_point()`)."
   },
   {
     "objectID": "model.html",
@@ -46,6 +46,48 @@
     "href": "model.html#get-some-information",
     "title": "Model",
     "section": "Get some information",
-    "text": "Get some information\n\n\nCode\nprint(f\"R^2 {model.score(X,y)}\")\nprint(f\"Intercept {model.intercept_}\")\nprint(f\"Columns {X.columns}\")\nprint(f\"Coefficients {model.coef_}\")\n\n\nR^2 0.8555368759537614\nIntercept 2169.269720939398\nColumns Index(['bill_length_mm', 'species_Chinstrap', 'species_Gentoo', 'sex_male'], dtype='object')\nCoefficients [  32.53688677 -298.76553447 1094.86739145  547.36692408]"
+    "text": "Get some information\n\n\nCode\nprint(f\"R^2 {model.score(X,y)}\")\nprint(f\"Intercept {model.intercept_}\")\nprint(f\"Columns {X.columns}\")\nprint(f\"Coefficients {model.coef_}\")\n\n\nR^2 0.8555368759537614\nIntercept 2169.2697209393996\nColumns Index(['bill_length_mm', 'species_Chinstrap', 'species_Gentoo', 'sex_male'], dtype='object')\nCoefficients [  32.53688677 -298.76553447 1094.86739145  547.36692408]"
+  },
+  {
+    "objectID": "eda-db.html",
+    "href": "eda-db.html",
+    "title": "Penguins EDA",
+    "section": "",
+    "text": "Code\ndf %>%\n  group_by(species, sex) %>%\n  summarise(\n    across(\n        ends_with(\"mm\") | ends_with(\"g\"),\n      \\(x) mean(x, na.rm = TRUE)\n      )\n    ) %>%\n  dplyr::collect() %>%\n  knitr::kable()\n\n\n`summarise()` has grouped output by \"species\". You can override using the\n`.groups` argument.\n\n\n\n\n\n\n\n\n\n\n\n\n\nspecies\nsex\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\n\n\n\n\nAdelie\nmale\n40.39041\n19.07260\n192.4110\n4043.493\n\n\nAdelie\nfemale\n37.25753\n17.62192\n187.7945\n3368.836\n\n\nAdelie\nNA\n37.84000\n18.32000\n185.6000\n3540.000\n\n\nGentoo\nfemale\n45.56379\n14.23793\n212.7069\n4679.741\n\n\nGentoo\nmale\n49.47377\n15.71803\n221.5410\n5484.836\n\n\nGentoo\nNA\n45.62500\n14.55000\n215.7500\n4587.500\n\n\nChinstrap\nfemale\n46.57353\n17.58824\n191.7353\n3527.206\n\n\nChinstrap\nmale\n51.09412\n19.25294\n199.9118\n3938.971"
+  },
+  {
+    "objectID": "eda-db.html#penguin-size-vs-mass-by-species",
+    "href": "eda-db.html#penguin-size-vs-mass-by-species",
+    "title": "Penguins EDA",
+    "section": "Penguin Size vs Mass by Species",
+    "text": "Penguin Size vs Mass by Species\n\n\nCode\ndf %>%\n  ggplot(aes(x = bill_length_mm, y = body_mass_g, color = species)) +\n  geom_point() + \n  geom_smooth(method = \"lm\")\n\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\nWarning: Removed 2 rows containing non-finite values (`stat_smooth()`).\n\n\nWarning: Removed 2 rows containing missing values (`geom_point()`).\n\n\n\n\n\n\n\nCode\nDBI::dbDisconnect(con)"
+  },
+  {
+    "objectID": "model-db.html",
+    "href": "model-db.html",
+    "title": "Model",
+    "section": "",
+    "text": "Code\nimport duckdb\nfrom pandas import get_dummies\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn import preprocessing"
+  },
+  {
+    "objectID": "model-db.html#get-data",
+    "href": "model-db.html#get-data",
+    "title": "Model",
+    "section": "Get Data",
+    "text": "Get Data\n\n\nCode\ncon = duckdb.connect('my-db.duckdb')\ndf = con.execute(\"SELECT * FROM penguins\").fetchdf().dropna()\ncon.close()\n\ndf.head(3)\n\n\n\n\n\n\n  \n    \n      \n      species\n      island\n      bill_length_mm\n      bill_depth_mm\n      flipper_length_mm\n      body_mass_g\n      sex\n      year\n    \n  \n  \n    \n      0\n      Adelie\n      Torgersen\n      39.1\n      18.7\n      181.0\n      3750.0\n      male\n      2007\n    \n    \n      1\n      Adelie\n      Torgersen\n      39.5\n      17.4\n      186.0\n      3800.0\n      female\n      2007\n    \n    \n      2\n      Adelie\n      Torgersen\n      40.3\n      18.0\n      195.0\n      3250.0\n      female\n      2007"
+  },
+  {
+    "objectID": "model-db.html#define-model-and-fit",
+    "href": "model-db.html#define-model-and-fit",
+    "title": "Model",
+    "section": "Define Model and Fit",
+    "text": "Define Model and Fit\n\n\nCode\nX = get_dummies(df[['bill_length_mm', 'species', 'sex']], drop_first = True)\ny = df['body_mass_g']\n\nmodel = LinearRegression().fit(X, y)"
+  },
+  {
+    "objectID": "model-db.html#get-some-information",
+    "href": "model-db.html#get-some-information",
+    "title": "Model",
+    "section": "Get some information",
+    "text": "Get some information\n\n\nCode\nprint(f\"R^2 {model.score(X,y)}\")\nprint(f\"Intercept {model.intercept_}\")\nprint(f\"Columns {X.columns}\")\nprint(f\"Coefficients {model.coef_}\")\n\n\nR^2 0.8555368759537614\nIntercept 2169.2697209393996\nColumns Index(['bill_length_mm', 'species_Chinstrap', 'species_Gentoo', 'sex_male'], dtype='object')\nCoefficients [  32.53688677 -298.76553447 1094.86739145  547.36692408]"
   }
 ]
