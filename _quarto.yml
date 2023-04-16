@@ -9,6 +9,8 @@ website:
         text: Home
       - href: eda.qmd
         text: EDA
+      - href: model.qmd
+        text: Model
 
 format:
   html:
