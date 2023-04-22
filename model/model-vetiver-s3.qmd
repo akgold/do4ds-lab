@@ -51,6 +51,7 @@ v = VetiverModel(model, model_name='penguin_model', prototype_data=X)
 ```
 
 ## Load Environment
+
 ```{python}
 from dotenv import load_dotenv
 
@@ -58,6 +59,7 @@ load_dotenv()
 ```
 
 ## Write to S3
+
 ```{python}
 from pins import board_s3
 from vetiver import vetiver_pin_write
@@ -65,4 +67,3 @@ from vetiver import vetiver_pin_write
 board = board_s3("do4ds-lab", allow_pickle_read=True)
 vetiver_pin_write(board, v)
 ```
-

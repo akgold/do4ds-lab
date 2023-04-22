@@ -3,3 +3,6 @@
 /.quarto/
 .Rproj.user
 _site/*
+.env
+.Rhistory
+.Rprofile
