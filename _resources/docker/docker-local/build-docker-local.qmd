@@ -1,0 +1,25 @@
+---
+title: "Prepare Dockerfile"
+format:
+  html:
+    code-fold: true
+---
+
+## Load Environment
+
+```{python}
+from dotenv import load_dotenv
+
+load_dotenv()
+```
+
+## Prepare Dockerfile
+
+```{python}
+from pins import board_folder
+from vetiver import prepare_docker
+
+board = board_s3("./model", allow_pickle_read=True)
+prepare_docker(board, "penguin_model")
+```
+
