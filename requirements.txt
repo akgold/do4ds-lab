@@ -15,8 +15,8 @@ attrs==23.1.0
 backcall==0.2.0
 beautifulsoup4==4.12.2
 bleach==6.0.0
-boto3==1.26.115
-botocore
+boto3==1.26.76
+botocore==1.29.76
 build==0.10.0
 certifi==2022.12.7
 cffi==1.15.1
