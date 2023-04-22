@@ -11,15 +11,10 @@ format:
 from dotenv import load_dotenv
 
 load_dotenv()
-```
 
-## Prepare Dockerfile
-
-```{python}
 from pins import board_s3
 from vetiver import vetiver_prepare_docker
 
 board = board_s3("do4ds-lab", allow_pickle_read=True)
 vetiver_prepare_docker(board, "penguin_model")
 ```
-
