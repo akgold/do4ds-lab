@@ -39,7 +39,7 @@
     "href": "model.html#get-some-information",
     "title": "Model",
     "section": "Get some information",
-    "text": "Get some information\n\n\nCode\nprint(f\"R^2 {model.score(X,y)}\")\nprint(f\"Intercept {model.intercept_}\")\nprint(f\"Columns {X.columns}\")\nprint(f\"Coefficients {model.coef_}\")\n\n\nR^2 0.8555368759537614\nIntercept 2169.269720939398\nColumns Index(['bill_length_mm', 'species_Chinstrap', 'species_Gentoo', 'sex_male'], dtype='object')\nCoefficients [  32.53688677 -298.76553447 1094.86739145  547.36692408]"
+    "text": "Get some information\n\n\nCode\nprint(f\"R^2 {model.score(X,y)}\")\nprint(f\"Intercept {model.intercept_}\")\nprint(f\"Columns {X.columns}\")\nprint(f\"Coefficients {model.coef_}\")\n\n\nR^2 0.8555368759537614\nIntercept 2169.2697209393996\nColumns Index(['bill_length_mm', 'species_Chinstrap', 'species_Gentoo', 'sex_male'], dtype='object')\nCoefficients [  32.53688677 -298.76553447 1094.86739145  547.36692408]"
   },
   {
     "objectID": "model.html#turn-into-vetiver-model",
@@ -60,6 +60,6 @@
     "href": "model.html#write-to-s3",
     "title": "Model",
     "section": "Write to S3",
-    "text": "Write to S3\n\n\nCode\nfrom pins import board_s3\nfrom vetiver import vetiver_pin_write\n\nboard = board_s3(\"do4ds-lab\", allow_pickle_read=True)\nvetiver_pin_write(board, v)\n\n\nModel Cards provide a framework for transparent, responsible reporting. \n Use the vetiver `.qmd` Quarto template as a place to start, \n with vetiver.model_card()\n\n\nWriting pin:\nName: 'penguin_model'\nVersion: 20230422T142323Z-284b0"
+    "text": "Write to S3\n\n\nCode\nfrom pins import board_s3\nfrom vetiver import vetiver_pin_write\n\nboard = board_s3(\"do4ds-lab\", allow_pickle_read=True)\nvetiver_pin_write(board, v)\n\n\nModel Cards provide a framework for transparent, responsible reporting. \n Use the vetiver `.qmd` Quarto template as a place to start, \n with vetiver.model_card()\n\n\nWriting pin:\nName: 'penguin_model'\nVersion: 20230422T143813Z-2daca"
   }
 ]
